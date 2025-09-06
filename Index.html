@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MIZUKI STORE — Top Up Game</title>
+  <meta name="description" content="Mizuki Store - Top up game cepat & aman (FF, Genshin, MLBB, Valorant, Pubg, Robux, dll)" />
+  <meta name="color-scheme" content="dark">
+  <style>
+    :root{
+      --bg:#05060a; --panel:#0f1418; --muted:#99a6b2;
+      --accent:#00e5ff; --accent2:#8b5cf6; --success:#25D366; --danger:#ff5fa3;
+      --glass: rgba(255,255,255,0.03); --radius:12px; --maxwidth:1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:
+      radial-gradient(circle at 10% 10%, rgba(0,229,255,0.01), transparent 10%),
+      radial-gradient(circle at 90% 90%, rgba(139,92,246,0.01), transparent 10%),
+      var(--bg); color:#eaf6ff; -webkit-font-smoothing:antialiased}
+    a{color:inherit}
+    /* Topbar */
+    .topbar{position:sticky;top:0;z-index:999;background:linear-gradient(90deg, rgba(0,0,0,0.28), rgba(0,0,0,0.12));border-bottom:1px solid rgba(255,255,255,0.03);padding:14px}
+    .topbar .container{max-width:var(--maxwidth);margin:0 auto;display:flex;align-items:center;gap:12px;justify-content:space-between}
+    .brand{font-weight:900;font-size:20px}
+    .brand .store{color:var(--accent2);margin-left:8px}
+    .top-right{color:var(--muted);font-size:13px}
+    /* Main */
+    .wrap{max-width:var(--maxwidth);margin:18px auto;padding:12px}
+    .layout{display:grid;grid-template-columns:1fr 360px;gap:18px}
+    @media (max-width:980px){ .layout{grid-template-columns:1fr} }
+    /* Search */
+    .top-controls{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+    .search input{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:var(--panel);color:inherit}
+    .hint{color:var(--muted);font-size:13px}
+    /* Accordion */
+    .accordion{display:flex;flex-direction:column;gap:10px}
+    .game-card{border-radius:12px;border:1px solid rgba(255,255,255,0.03);overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005))}
+    .game-head{display:flex;align-items:center;gap:12px;padding:12px;cursor:pointer}
+    .game-head img{width:56px;height:56px;object-fit:contain;border-radius:10px}
+    .game-meta{flex:1}
+    .game-title{font-weight:900}
+    .game-desc{color:var(--muted);font-size:13px}
+    .chev{font-weight:900;color:var(--muted);font-size:20px}
+    .game-body{padding:12px;border-top:1px solid rgba(255,255,255,0.02);display:none}
+    .game-card.open .game-body{display:block}
+    /* Packs grid */
+    .packs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+    .pack{background:var(--panel);border-radius:10px;padding:12px;border:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;justify-content:space-between}
+    .pkg-title{font-weight:800}
+    .pkg-sub{color:var(--muted);font-size:13px;margin-top:6px}
+    .pkg-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+    .price{font-weight:900;color:var(--accent)}
+    .btn-buy{background:var(--accent);border:none;color:#031018;padding:8px 10px;border-radius:8px;font-weight:800;cursor:pointer}
+    /* Order panel */
+    .order-panel{position:sticky;top:86px;padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border:1px solid rgba(255,255,255,0.03)}
+    .order-panel h3{margin:0;color:var(--accent)}
+    .form-row{display:flex;flex-direction:column;margin-top:10px}
+    .form-row label{font-size:13px;color:var(--muted);margin-bottom:6px}
+    .form-row input, .form-row textarea, .form-row select{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit}
+    .summary{margin-top:12px;background:var(--panel);padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03)}
+    .summary-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed rgba(255,255,255,0.02)}
+    .summary-row:last-child{border-bottom:0}
+    .order-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px 10px;border-radius:8px;color:var(--muted);cursor:pointer}
+    .btn-primary{background:var(--accent2);border:none;padding:8px 12px;border-radius:8px;color:#031018;font-weight:800;cursor:pointer}
+    .btn-wa{background:var(--success);border:none;padding:8px 12px;border-radius:8px;color:#031018;font-weight:800;cursor:pointer}
+    .btn-copy{background:var(--accent);border:none;padding:8px 12px;border-radius:8px;color:#031018;font-weight:800;cursor:pointer}
+    /* Payment */
+    .payment{margin-top:18px;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent)}
+    .pay-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+    .pay-card{background:var(--panel);padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.03)}
+    .note{margin-top:12px;padding:10px;border-radius:8px;background:rgba(255,95,163,0.04);color:var(--danger);font-weight:700}
+    /* modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:9999}
+    .modal{background:var(--panel);padding:18px;border-radius:12px;width:480px;max-width:92%;border:1px solid rgba(255,255,255,0.04)}
+    .modal h4{margin:0 0 10px}
+    footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px;padding-bottom:40px}
+    @media (max-width:480px){ .game-head img{width:48px;height:48px} .packs{grid-template-columns:repeat(2,1fr)} }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <div>
+        <span class="brand">MIZUKI <span class="store">STORE</span></span>
+        <div style="font-size:13px;color:var(--muted)">Top Up Game • Cepat • Aman</div>
+      </div>
+      <div class="top-right">Order 08.00 - 22.00 WIB • Proses 1 - 5 menit</div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="layout">
+      <!-- LEFT -->
+      <div>
+        <div class="top-controls">
+          <div style="flex:1"><input id="search" placeholder="Cari game atau paket (mis. FF / 100 / Robux)"></div>
+          <div class="hint">Klik game untuk buka / tutup</div>
+        </div>
+
+        <div class="accordion" id="accordion"></div>
+      </div>
+
+      <!-- RIGHT: Order -->
+      <aside class="right">
+        <div class="order-panel">
+          <h3>Form Order</h3>
+          <div class="form-row"><label>Nama Pembeli</label><input id="buyerName" placeholder="Nama lengkap" /></div>
+          <div class="form-row"><label>ID / UID / Nickname</label><input id="buyerId" placeholder="Masukkan ID/UID/Nickname" /></div>
+          <div class="form-row"><label>Zona / Server (opsional)</label><input id="buyerZone" placeholder="Contoh: Asia / Server 1" /></div>
+          <div class="form-row"><label>Catatan (opsional)</label><textarea id="buyerNote" rows="2" placeholder="Contoh: jangan aktifkan 2FA"></textarea></div>
+
+          <div class="summary">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <strong>Ringkasan</strong>
+              <small id="orderCode">#—</small>
+            </div>
+            <div class="summary-row"><div>Game</div><div id="sumGame">-</div></div>
+            <div class="summary-row"><div>Paket</div><div id="sumPackage">-</div></div>
+            <div class="summary-row"><div>Harga</div><div id="sumPrice">-</div></div>
+            <div class="summary-row"><div>ID</div><div id="sumId">-</div></div>
+            <div class="order-actions">
+              <button class="btn-ghost" onclick="resetOrder()">Reset</button>
+              <button class="btn-primary" onclick="prepareCheckout()">Checkout</button>
+              <button class="btn-wa" onclick="openWhatsApp(false)">Chat Admin WA</button>
+            </div>
+          </div>
+
+          <div style="margin-top:12px;color:var(--muted);font-size:13px">
+            Kontak Admin: <strong>+6283186441039</strong><br>
+            Note: Salah ID kami tidak tanggung jawab.
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- PAYMENT -->
+    <div id="paymentArea" class="payment" style="display:none">
+      <h3 style="color:var(--accent)">Metode Pembayaran</h3>
+      <div id="paymentSummary" style="margin-top:8px"></div>
+      <div class="pay-grid">
+        <div class="pay-card"><h4>DANA</h4><p><strong id="payDana">083186441039</strong> (Wajib +100)</p><button class="btn-ghost" onclick="copyText(document.getElementById('payDana').textContent)">Salin DANA</button></div>
+        <div class="pay-card"><h4>SOPIPAY</h4><p><strong id="paySopi">083186441039</strong></p><button class="btn-ghost" onclick="copyText(document.getElementById('paySopi').textContent)">Salin SOPIPAY</button></div>
+        <div class="pay-card"><h4>GOPAY</h4><p><strong id="payGopay">083186441039</strong></p><button class="btn-ghost" onclick="copyText(document.getElementById('payGopay').textContent)">Salin GOPAY</button></div>
+        <div class="pay-card"><h4>BANK BRI</h4><p><strong id="payBri">7632 0100 6551 538</strong><br><small>a/n Kristin Putri Ayu</small></p><button class="btn-ghost" onclick="copyText(document.getElementById('payBri').textContent)">Salin BRI</button></div>
+        <div class="pay-card"><h4>BANK BCA</h4><p><strong id="payBca">8000919994</strong><br><small>a/n Kristin Putri Ayu</small></p><button class="btn-ghost" onclick="copyText(document.getElementById('payBca').textContent)">Salin BCA</button></div>
+      </div>
+
+      <div class="note">⚠ Dilarang keras TF selain nomor e-wallet & rekening di atas. Setelah transfer segera konfirmasi via WhatsApp.</div>
+
+      <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn-wa" onclick="openWhatsApp(true)">✅ Konfirmasi Pembayaran via WA</button>
+        <button class="btn-copy" onclick="copyOrderText()">📋 Salin Detail Order</button>
+      </div>
+    </div>
+
+    <footer>© 2025 MIZUKI STORE • Order 08.00 - 22.00 WIB • Salah ID bukan tanggung jawab kami</footer>
+  </main>
+
+  <!-- modal confirm -->
+  <div id="modal" class="modal-backdrop"><div class="modal" role="dialog" aria-modal="true"><h4>Konfirmasi Order</h4><div id="modalBody"></div><div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end"><button class="btn-ghost" onclick="closeModal()">Batal</button><button class="btn-wa" onclick="modalConfirm()">Kirim ke WhatsApp</button></div></div></div>
+
+  <script>
+    // ---------- ADMIN WA ----------
+    const ADMIN_WA = '+6283186441039';
+
+    // ---------- DATA: Semua game + paket (dari daftar user) ----------
+    // Gunakan id untuk nama file gambar: img/<id>.png (contoh: img/ff.png)
+    const GAMES = [
+      // FREE FIRE (FF)
+      {id:'ff', name:'FREE FIRE', logo:'img/ff.png', desc:'FREE FIRE - Top up Diamonds', packages:[
+        {k:'50', label:'50 💎', price:7500},
+        {k:'100', label:'100 💎', price:15000},
+        {k:'200', label:'200 💎', price:28000},
+        {k:'280', label:'280 💎', price:37000},
+        {k:'355', label:'355 💎', price:47200},
+        {k:'425', label:'425 💎', price:55500},
+        {k:'475', label:'475 💎', price:63000},
+        {k:'1000', label:'1000 💎', price:125000},
+        {k:'1450', label:'1450 💎', price:176000},
+        {k:'2000', label:'2000 💎', price:247000},
+        {k:'3640', label:'3640 💎', price:452000},
+        {k:'4000', label:'4000 💎', price:501000},
+        {k:'7290', label:'7290 💎', price:900500}
+      ]},
+
+      // GENSHIN
+      {id:'genshin', name:'GENSHIN', logo:'img/genshin.png', desc:'Genshin — Primogems & Welkin', packages:[
+        {k:'60', label:'60 💠', price:11667},
+        {k:'330', label:'330 💠', price:58335},
+        {k:'1090', label:'1090 💠', price:175005},
+        {k:'2240', label:'2240 💠', price:373334},
+        {k:'3880', label:'3880 💠', price:571673},
+        {k:'8080', label:'8080 💠', price:1143366},
+        {k:'welkin', label:'Welkin', price:58335}
+      ]},
+
+      // GIFTSKINML
+      {id:'giftskinml', name:'GIFTSKINML', logo:'img/giftskinml.png', desc:'Gift Skin & Item Mobile Legends', packages:[
+        // Gift Skin
+        {k:'299s', label:'299 💎 — NORMAL', price:0},
+        {k:'599s', label:'599 💎 — ELITE', price:0},
+        {k:'749s', label:'749 💎 — SPECIAL', price:0},
+        {k:'899s', label:'899 💎 — EPIC', price:0},
+        {k:'1089s', label:'1089 💎 — LIGHTBORN', price:0},
+        // Gift Item
+        {k:'109i', label:'109 💎 — EMOTE', price:0},
+        {k:'199i', label:'199 💎 — CREATE SQUAD', price:0},
+        {k:'239i', label:'239 💎 — CHANGE NAME', price:0},
+        {k:'299i', label:'299 💎 — SQ CNG NAME', price:0},
+        {k:'300i', label:'300 💎 — CHANGE FLAG', price:0},
+        // Magic Chess
+        {k:'269mc', label:'269 💎 — BASIC', price:0},
+        {k:'399mc', label:'399 💎 — COMMANDER', price:0},
+        {k:'499mc', label:'499 💎 — COMMANDER', price:0},
+        {k:'599mc', label:'599 💎 — ELITE', price:0},
+        {k:'899mc', label:'899 💎 — EPIC', price:0}
+      ]},
+
+      // HSR
+      {id:'hsr', name:'HSR', logo:'img/hsr.png', desc:'Honkai Star Rail', packages:[
+        {k:'60', label:'60 🌸', price:14273},
+        {k:'330', label:'330 🌸', price:58000},
+        {k:'1090', label:'1090 🌸', price:173500},
+        {k:'2240', label:'2240 🌸', price:371114},
+        {k:'3880', label:'3880 🌸', price:571814},
+        {k:'8080', label:'8080 🌸', price:1144000},
+        {k:'esp', label:'ESP (Card)', price:58000}
+      ]},
+
+      // MLB
+      {id:'mlb', name:'MLB', logo:'img/mlb.png', desc:'MLB top up', packages:[
+        {k:'85', label:'85 💎', price:22344},
+        {k:'240', label:'240 💎', price:63567},
+        {k:'296', label:'296 💎', price:78264},
+        {k:'301', label:'301 💎', price:80000},
+        {k:'568', label:'568 💎', price:147109},
+        {k:'627', label:'627 💎', price:163400},
+        {k:'716', label:'716 💎', price:189500},
+        {k:'976', label:'976 💎', price:254000},
+        {k:'1050', label:'1050 💎', price:270000}
+      ]},
+
+      // MLBB DOUBLE
+      {id:'mlbbdouble', name:'MLBB DOUBLE', logo:'img/mlbbdouble.png', desc:'MLBB Double Packs', packages:[
+        {k:'50+50', label:'50+50', price:15000},
+        {k:'150+150', label:'150+150', price:46000},
+        {k:'250+250', label:'250+250', price:74500},
+        {k:'500+500', label:'500+500', price:150000}
+      ]},
+
+      // MLC
+      {id:'mlc', name:'MLC', logo:'img/mlc.png', desc:'MLC top up', packages:[
+        {k:'28', label:'28 💎', price:8000},
+        {k:'44', label:'44 💎', price:12000},
+        {k:'59', label:'59 💎', price:16203},
+        {k:'170', label:'170 💎', price:45000},
+        {k:'408', label:'408 💎', price:108000},
+        {k:'568', label:'568 💎', price:150000},
+        {k:'875', label:'875 💎', price:225000},
+        {k:'2010', label:'2010 💎', price:487000},
+        {k:'4830', label:'4830 💎', price:1155000}
+      ]},
+
+      // MLVILOG
+      {id:'mlvilog', name:'MLVILOG', logo:'img/mlvilog.png', desc:'MLVILOG (Khusus Combine & Paket besar)', packages:[
+        {k:'275', label:'275 💎 — Khusus Combine', price:70000},
+        {k:'565', label:'565 💎', price:130000},
+        {k:'840', label:'840 💎', price:200000},
+        {k:'1155', label:'1155 💎', price:250000},
+        {k:'1430', label:'1430 💎', price:320000},
+        {k:'1765', label:'1765 💎', price:367000},
+        {k:'2040', label:'2040 💎', price:437000},
+        {k:'2330', label:'2330 💎', price:510000},
+        {k:'2975', label:'2975 💎', price:605000},
+        {k:'6000', label:'6000 💎', price:1200000},
+        {k:'12000', label:'12000 💎', price:2400000}
+      ]},
+
+      // PUBGM
+      {id:'pubgm', name:'PUBGM', logo:'img/pubgm.png', desc:'PUBG Mobile UC', packages:[
+        {k:'60', label:'60 💸', price:15000},
+        {k:'325', label:'325 💸', price:75000},
+        {k:'660', label:'660 💸', price:150000},
+        {k:'1800', label:'1800 💸', price:363000},
+        {k:'3850', label:'3850 💸', price:716000},
+        {k:'8100', label:'8100 💸', price:1450000}
+      ]},
+
+      // ROBUX
+      {id:'robux', name:'ROBUX', logo:'img/robux.png', desc:'Robux (Official)', packages:[
+        {k:'800', label:'800 🪙', price:169000},
+        {k:'1600', label:'1600 🪙', price:338000},
+        {k:'2000', label:'2000 🪙', price:420000},
+        {k:'2400', label:'2400 🪙', price:507000},
+        {k:'3200', label:'3200 🪙', price:676000},
+        {k:'4500', label:'4500 🪙', price:834500},
+        {k:'5300', label:'5300 🪙', price:1000000}
+      ]},
+
+      // ROBUXVILOG
+      {id:'robuxvilog', name:'ROBUXVILOG', logo:'img/robuxvilog.png', desc:'Robux Vilog', packages:[
+        {k:'80', label:'80 Robux', price:15000},
+        {k:'160', label:'160 Robux', price:30000},
+        {k:'240', label:'240 Robux', price:43500},
+        {k:'320', label:'320 Robux', price:57000},
+        {k:'400', label:'400 Robux', price:71000},
+        {k:'500', label:'500 Robux', price:75000},
+        {k:'800v', label:'800 Robux', price:140000},
+        {k:'1000v', label:'1000 Robux', price:150000},
+        {k:'1700v', label:'1700 Robux', price:280000},
+        {k:'2000v', label:'2000 Robux', price:295000},
+        {k:'3000v', label:'3000 Robux', price:440000},
+        {k:'4500v', label:'4500 Robux', price:690000},
+        {k:'10000v', label:'10000 Robux', price:1380000}
+      ]},
+
+      // SL (starlight)
+      {id:'sl', name:'SL (Starlight)', logo:'img/sl.png', desc:'Starlight (PO & Delay)', packages:[
+        {k:'sl300', label:'Starlight 300 💎', price:36000, note:'Delay 7-10 Hari'},
+        {k:'sl750', label:'Starlight 750 💎', price:80000, note:'Delay 7-10 Hari'},
+        {k:'po300', label:'PO Starlight 300 💎', price:33000, note:'PO bulan depan'}
+      ]},
+
+      // VALORANT
+      {id:'valorant', name:'VALORANT', logo:'img/valorant.png', desc:'Valorant Points', packages:[
+        {k:'475', label:'475 VP', price:53500},
+        {k:'1000', label:'1000 VP', price:106500},
+        {k:'2050', label:'2050 VP', price:210000},
+        {k:'3650', label:'3650 VP', price:363333},
+        {k:'5350', label:'5350 VP', price:520000},
+        {k:'11000', label:'11.000 VP', price:1027000}
+      ]},
+
+      // WDP
+      {id:'wdp', name:'WDP', logo:'img/wdp.png', desc:'Weekly Diamond Pass', packages:[
+        {k:'fast', label:'VIA ID FAST', price:27100, note:'Claim 20💎 selama 7 hari • Total 220💎'}
+      ]},
+
+      // ZZZ
+      {id:'zzz', name:'ZZZ', logo:'img/zzz.png', desc:'ZZZ service', packages:[
+        {k:'60z', label:'60 💾', price:12800},
+        {k:'300_30', label:'300+30 💾', price:60000},
+        {k:'980_110', label:'980+110 💾', price:183000},
+        {k:'1980_260', label:'1980+260 💾', price:360000},
+        {k:'3280_600', label:'3280+600 💾', price:590000},
+        {k:'6480_1600', label:'6480+1600 💾', price:1150000},
+        {k:'membership', label:'Inter-knot membership', price:60000}
+      ]}
+    ];
+
+    // ---------- HELPERS ----------
+    function placeholder(size,text='IMG'){
+      const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='${size}' height='${size}'><rect width='100%' height='100%' fill='%23101214'/><text x='50%' y='50%' fill='%23ffffff' font-family='Arial' font-size='12' dominant-baseline='middle' text-anchor='middle'>${text}</text></svg>`;
+      return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+    }
+    function formatRp(n){
+      if(n===0) return 'Harga by request';
+      if(!n && n!==0) return '-';
+      return 'Rp' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+    function genOrderCode(){ const t=Date.now().toString(36).slice(-6).toUpperCase(); const r=Math.floor(Math.random()*900+100); return 'MZ'+t+r; }
+    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; }); }
+
+    // ---------- RENDER ACCORDION ----------
+    const acc = document.getElementById('accordion');
+    GAMES.forEach(g=>{
+      const card = document.createElement('div'); card.className='game-card'; card.id='card-'+g.id;
+      const head = document.createElement('div'); head.className='game-head';
+      const img = document.createElement('img'); img.src=g.logo; img.alt=g.name; img.onerror=function(){ this.src=placeholder(56,g.name.slice(0,3)) };
+      const meta = document.createElement('div'); meta.className='game-meta';
+      const title = document.createElement('div'); title.className='game-title'; title.textContent=g.name;
+      const desc = document.createElement('div'); desc.className='game-desc'; desc.textContent=g.desc;
+      meta.appendChild(title); meta.appendChild(desc);
+      const chev = document.createElement('div'); chev.className='chev'; chev.textContent='+';
+      head.appendChild(img); head.appendChild(meta); head.appendChild(chev);
+
+      const body = document.createElement('div'); body.className='game-body';
+      if(g.packages && g.packages.length){
+        const grid = document.createElement('div'); grid.className='packs';
+        g.packages.forEach(p=>{
+          const pack = document.createElement('div'); pack.className='pack';
+          const pkgTitle = document.createElement('div'); pkgTitle.className='pkg-title'; pkgTitle.textContent = p.label;
+          const pkgSub = document.createElement('div'); pkgSub.className='pkg-sub'; pkgSub.textContent = p.note ? p.note : (typeof p.price === 'number' ? formatRp(p.price) : 'Harga by request');
+          const bottom = document.createElement('div'); bottom.className='pkg-bottom';
+          const price = document.createElement('div'); price.className='price'; price.textContent = (typeof p.price === 'number' && p.price>0) ? formatRp(p.price) : (p.price===0 ? 'Harga by request' : '-');
+          const btn = document.createElement('button'); btn.className='btn-buy'; btn.textContent='Beli';
+          btn.onclick = ()=> selectPackage(g.id, p.k, p.label, p.price);
+          bottom.appendChild(price); bottom.appendChild(btn);
+          pack.appendChild(pkgTitle); pack.appendChild(pkgSub); pack.appendChild(bottom);
+          grid.appendChild(pack);
+        });
+        body.appendChild(grid);
+      } else {
+        const info = document.createElement('div'); info.style.color='var(--muted)'; info.style.padding='8px 0'; info.textContent='Menu pembayaran / info (tidak ada paket)'; body.appendChild(info);
+      }
+
+      head.addEventListener('click', ()=>{
+        const open = card.classList.toggle('open');
+        chev.textContent = open ? '−' : '+';
+        if(open){
+          document.querySelectorAll('.game-card').forEach(c=>{
+            if(c!==card){ c.classList.remove('open'); const ch=c.querySelector('.chev'); if(ch) ch.textContent='+'; }
+          });
+        }
+      });
+
+      card.appendChild(head); card.appendChild(body); acc.appendChild(card);
+    });
+
+    // ---------- SEARCH ----------
+    document.getElementById('search').addEventListener('input', function(){
+      const q = this.value.trim().toLowerCase();
+      GAMES.forEach(g=>{
+        const card = document.getElementById('card-'+g.id);
+        if(!q){ card.style.display='block'; return; }
+        const inName = g.name.toLowerCase().includes(q);
+        const inDesc = (g.desc||'').toLowerCase().includes(q);
+        const inPkg = g.packages && g.packages.some(p => p.label.toLowerCase().includes(q) || (''+p.price).includes(q));
+        card.style.display = (inName||inDesc||inPkg) ? 'block' : 'none';
+      });
+    });
+
+    // ---------- ORDER STATE ----------
+    let SELECTED = {gameId:null,pkgKey:null,pkgLabel:null,price:0,orderCode:'#—'};
+
+    function selectPackage(gameId,pkgKey,pkgLabel,price){
+      const game = GAMES.find(x=>x.id===gameId);
+      if(!game) return;
+      SELECTED = {gameId,pkgKey,pkgLabel,price,orderCode:genOrderCode()};
+      document.getElementById('sumGame').textContent = game.name;
+      document.getElementById('sumPackage').textContent = pkgLabel;
+      document.getElementById('sumPrice').textContent = (typeof price==='number' && price>0) ? formatRp(price) : (price===0 ? 'Harga by request' : '-');
+      document.getElementById('orderCode').textContent = SELECTED.orderCode;
+      document.getElementById('sumId').textContent = document.getElementById('buyerId').value.trim() || '-';
+      document.querySelector('.order-panel').scrollIntoView({behavior:'smooth'});
+      showToast('Paket dipilih: ' + pkgLabel + '. Isi Nama & ID lalu Checkout.');
+    }
+
+    function resetOrder(){
+      SELECTED = {gameId:null,pkgKey:null,pkgLabel:null,price:0,orderCode:'#—'};
+      document.getElementById('sumGame').textContent = '-';
+      document.getElementById('sumPackage').textContent = '-';
+      document.getElementById('sumPrice').textContent = '-';
+      document.getElementById('sumId').textContent = '-';
+      document.getElementById('buyerName').value = '';
+      document.getElementById('buyerId').value = '';
+      document.getElementById('buyerZone').value = '';
+      document.getElementById('buyerNote').value = '';
+      document.getElementById('orderCode').textContent = '#—';
+      document.getElementById('paymentArea').style.display = 'none';
+      showToast('Form reset');
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+
+    document.getElementById('buyerId').addEventListener('input', ()=> {
+      document.getElementById('sumId').textContent = document.getElementById('buyerId').value.trim() || '-';
+    });
+
+    // ---------- CHECKOUT & PAYMENT ----------
+    function prepareCheckout(){
+      if(!SELECTED.gameId || !SELECTED.pkgKey){ alert('Pilih game & paket terlebih dulu.'); return; }
+      const name = document.getElementById('buyerName').value.trim();
+      const id = document.getElementById('buyerId').value.trim();
+      if(!name || !id){ alert('Nama & ID/UID wajib diisi sebelum checkout.'); return; }
+
+      const game = GAMES.find(x=>x.id===SELECTED.gameId);
+      const priceText = (typeof SELECTED.price==='number' && SELECTED.price>0) ? formatRp(SELECTED.price) : (SELECTED.price===0 ? 'Harga by request' : '-');
+      const code = SELECTED.orderCode;
+      const zone = document.getElementById('buyerZone').value.trim();
+      const note = document.getElementById('buyerNote').value.trim();
+
+      const html = `<div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-weight:900">${escapeHtml(game.name)} — ${escapeHtml(SELECTED.pkgLabel)}</div>
+          <div style="color:var(--muted);margin-top:6px">Nama: <strong>${escapeHtml(name)}</strong></div>
+          <div style="color:var(--muted)">ID: <strong>${escapeHtml(id)}</strong> ${zone ? '• Zona: ' + escapeHtml(zone) : ''}</div>
+          ${note ? '<div style="color:var(--muted);margin-top:6px">Catatan: ' + escapeHtml(note) + '</div>' : ''}
+        </div>
+        <div style="text-align:right">
+          <div style="font-weight:900;color:var(--accent)">${priceText}</div>
+          <div style="color:var(--muted);margin-top:6px">Order ID: <strong>${code}</strong></div>
+        </div>
+      </div>`;
+
+      document.getElementById('paymentSummary').innerHTML = html;
+      document.getElementById('paymentArea').style.display = 'block';
+      document.getElementById('paymentArea').scrollIntoView({behavior:'smooth'});
+      openModal(html);
+    }
+
+    // ---------- MODAL ----------
+    function openModal(html){ document.getElementById('modalBody').innerHTML = html; document.getElementById('modal').style.display = 'flex'; }
+    function closeModal(){ document.getElementById('modal').style.display = 'none'; }
+    function modalConfirm(){ closeModal(); openWhatsApp(false); }
+
+    // ---------- WHATSAPP ----------
+    function openWhatsApp(confirming=false){
+      const name = document.getElementById('buyerName').value.trim() || '-';
+      const id = document.getElementById('buyerId').value.trim() || '-';
+      const zone = document.getElementById('buyerZone').value.trim() || '-';
+      const note = document.getElementById('buyerNote').value.trim() || '-';
+      const game = SELECTED.gameId ? (GAMES.find(x=>x.id===SELECTED.gameId).name) : '-';
+      const pkg = SELECTED.pkgLabel || '-';
+      const price = (typeof SELECTED.price==='number' && SELECTED.price>0) ? formatRp(SELECTED.price) : (SELECTED.price===0 ? 'Harga by request' : '-');
+      const order = SELECTED.orderCode || genOrderCode();
+      const base = confirming ? 'Konfirmasi Pembayaran' : 'Order Baru';
+      const lines = [
+        base + ' - MIZUKI STORE',
+        'OrderID: ' + order,
+        'Nama: ' + name,
+        'ID: ' + id,
+        'Zona/Server: ' + zone,
+        'Game: ' + game,
+        'Paket: ' + pkg,
+        'Harga: ' + price,
+        'Catatan: ' + note
+      ];
+      const msg = encodeURIComponent(lines.join('\n'));
+      const waUrl = 'https://wa.me/' + ADMIN_WA.replace(/\D/g,'') + '?text=' + msg;
+      window.open(waUrl, '_blank');
+    }
+
+    // ---------- COPY HELPERS ----------
+    function copyText(text){ if(!text) return alert('Tidak ada teks untuk disalin'); if(navigator.clipboard) navigator.clipboard.writeText(text).then(()=> showToast('Tersalin ke clipboard')).catch(()=> fallbackCopy(text)); else fallbackCopy(text); }
+    function fallbackCopy(text){ const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');showToast('Tersalin ke clipboard')}catch(e){alert('Gagal menyalin')}ta.remove(); }
+    function copyOrderText(){ const code = SELECTED.orderCode || genOrderCode(); const text = `OrderID: ${code}\nNama: ${document.getElementById('buyerName').value}\nID: ${document.getElementById('buyerId').value}\nZona: ${document.getElementById('buyerZone').value}\nGame: ${document.getElementById('sumGame').textContent}\nPaket: ${document.getElementById('sumPackage').textContent}\nHarga: ${document.getElementById('sumPrice').textContent}`; copyText(text); }
+    function showToast(msg){ const el=document.createElement('div');el.textContent=msg;el.style.position='fixed';el.style.right='18px';el.style.bottom='18px';el.style.background='rgba(0,0,0,0.8)';el.style.color='#fff';el.style.padding='10px 12px';el.style.borderRadius='8px';el.style.zIndex=9999;document.body.appendChild(el);setTimeout(()=>el.remove(),1400); }
+
+    // ---------- INIT ----------
+    // update sumId live
+    document.getElementById('buyerId').addEventListener('input', ()=> { document.getElementById('sumId').textContent = document.getElementById('buyerId').value.trim() || '-'; });
+
+    // set initial state
+    resetOrder();
+  </script>
+</body>
+</html>
