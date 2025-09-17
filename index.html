@@ -140,7 +140,11 @@
       <div id="paymentSummary" style="margin-top:8px"></div>
       <div class="pay-grid">
         <div class="pay-card"><h4>DANA</h4><p><strong id="payDana">083186441039</strong> (Wajib +100)</p><button class="btn-ghost" onclick="copyText(document.getElementById('payDana').textContent)">Salin DANA</button></div>
-        </div>
+        <div class="pay-card"><h4>SOPIPAY</h4><p><strong id="paySopi">083186441039</strong></p><button class="btn-ghost" onclick="copyText(document.getElementById('paySopi').textContent)">Salin SOPIPAY</button></div>
+        <div class="pay-card"><h4>GOPAY</h4><p><strong id="payGopay">083186441039</strong></p><button class="btn-ghost" onclick="copyText(document.getElementById('payGopay').textContent)">Salin GOPAY</button></div>
+        <div class="pay-card"><h4>BANK BRI</h4><p><strong id="payBri">7632 0100 6551 538</strong><br><small>a/n Kristin Putri Ayu</small></p><button class="btn-ghost" onclick="copyText(document.getElementById('payBri').textContent)">Salin BRI</button></div>
+        <div class="pay-card"><h4>BANK BCA</h4><p><strong id="payBca">8000919994</strong><br><small>a/n Kristin Putri Ayu</small></p><button class="btn-ghost" onclick="copyText(document.getElementById('payBca').textContent)">Salin BCA</button></div>
+      </div>
 
       <div class="note">⚠ Dilarang keras TF selain nomor e-wallet & rekening di atas. Setelah transfer segera konfirmasi via WhatsApp.</div>
 
@@ -163,7 +167,28 @@
     // ---------- DATA: Semua game + paket (dari daftar user) ----------
     // Gunakan id untuk nama file gambar: img/<id>.png (contoh: img/ff.png)
     const GAMES = [
-      // FREE FIRE (FF)
+       // MLB
+      {id:'mlb', name:'MOBILE LEGEND', logo:'img/mlb.png', desc:'MOBILE LEGEND TOP-UP', packages:[
+        {k:'28', label:'28 💎', price:8000},
+        {k:'44', label:'44 💎', price:12000},
+        {k:'59', label:'59 💎', price:16203},
+        {k:'85', label:'85 💎', price:22344},
+        {k:'170', label:'170 💎', price:45000},
+        {k:'240', label:'240 💎', price:63567},
+        {k:'296', label:'296 💎', price:78264},
+        {k:'301', label:'301 💎', price:80000},
+        {k:'408', label:'408 💎', price:108000},
+        {k:'568', label:'568 💎', price:150000},
+        {k:'627', label:'627 💎', price:163400},
+        {k:'716', label:'716 💎', price:189500},
+        {k:'875', label:'875 💎', price:225000},
+        {k:'976', label:'976 💎', price:254000},
+        {k:'1050', label:'1050 💎', price:270000},
+        {k:'2010', label:'2010 💎', price:487000},
+        {k:'4830', label:'4830 💎', price:1155000},
+      ]},
+
+       // FREE FIRE (FF)
       {id:'ff', name:'FREE FIRE', logo:'img/ff.png', desc:'FREE FIRE - Top up Diamonds', packages:[
         {k:'50', label:'50 💎', price:7500},
         {k:'100', label:'100 💎', price:15000},
@@ -180,75 +205,29 @@
         {k:'7290', label:'7290 💎', price:900500}
       ]},
 
-      // GENSHIN
-      {id:'genshin', name:'GENSHIN', logo:'img/genshin.png', desc:'Genshin — Primogems & Welkin', packages:[
-        {k:'60', label:'60 💠', price:11667},
-        {k:'330', label:'330 💠', price:58335},
-        {k:'1090', label:'1090 💠', price:175005},
-        {k:'2240', label:'2240 💠', price:373334},
-        {k:'3880', label:'3880 💠', price:571673},
-        {k:'8080', label:'8080 💠', price:1143366},
-        {k:'welkin', label:'Welkin', price:58335}
-      ]},
-
       // GIFTSKINML
       {id:'giftskinml', name:'GIFTSKINML', logo:'img/giftskinml.png', desc:'Gift Skin & Item Mobile Legends', packages:[
         // Gift Skin
-        {k:'299s', label:'299 💎 — NORMAL', price:0},
-        {k:'599s', label:'599 💎 — ELITE', price:0},
-        {k:'749s', label:'749 💎 — SPECIAL', price:0},
-        {k:'899s', label:'899 💎 — EPIC', price:0},
-        {k:'1089s', label:'1089 💎 — LIGHTBORN', price:0},
+        {k:'299s', label:'299 💎 — NORMAL-GIFT.SKIN', price:0},
+        {k:'599s', label:'599 💎 — ELITE-GIFT.SKIN', price:0},
+        {k:'749s', label:'749 💎 — SPECIAL-GIFT.SKIN', price:0},
+        {k:'899s', label:'899 💎 — EPIC-GIFT.SKIN', price:0},
+        {k:'1089s', label:'1089 💎 — LIGHTBORN-GIFT.SKIN', price:0},
         // Gift Item
-        {k:'109i', label:'109 💎 — EMOTE', price:0},
-        {k:'199i', label:'199 💎 — CREATE SQUAD', price:0},
-        {k:'239i', label:'239 💎 — CHANGE NAME', price:0},
-        {k:'299i', label:'299 💎 — SQ CNG NAME', price:0},
-        {k:'300i', label:'300 💎 — CHANGE FLAG', price:0},
+        {k:'109i', label:'109 💎 — EMOTE-GIFT.ITEM', price:0},
+        {k:'199i', label:'199 💎 — CREATE SQUAD-GIFT.ITEM', price:0},
+        {k:'239i', label:'239 💎 — CHANGE NAME-GIFT.ITEM', price:0},
+        {k:'299i', label:'299 💎 — SQ CNG NAME-GIFT.ITEM', price:0},
+        {k:'300i', label:'300 💎 — CHANGE FLAG-GIFT.ITEM', price:0},
         // Magic Chess
-        {k:'269mc', label:'269 💎 — BASIC', price:0},
-        {k:'399mc', label:'399 💎 — COMMANDER', price:0},
-        {k:'499mc', label:'499 💎 — COMMANDER', price:0},
-        {k:'599mc', label:'599 💎 — ELITE', price:0},
-        {k:'899mc', label:'899 💎 — EPIC', price:0}
+        {k:'269mc', label:'269 💎 — BASIC-MCGG', price:0},
+        {k:'399mc', label:'399 💎 — COMMANDER-MCGG', price:0},
+        {k:'499mc', label:'499 💎 — COMMANDER-MCGG', price:0},
+        {k:'599mc', label:'599 💎 — ELITE-MCGG', price:0},
+        {k:'899mc', label:'899 💎 — EPIC-MCGG', price:0}
       ]},
 
-      // HSR
-      {id:'hsr', name:'HSR', logo:'img/hsr.png', desc:'Honkai Star Rail', packages:[
-        {k:'60', label:'60 🌸', price:14273},
-        {k:'330', label:'330 🌸', price:58000},
-        {k:'1090', label:'1090 🌸', price:173500},
-        {k:'2240', label:'2240 🌸', price:371114},
-        {k:'3880', label:'3880 🌸', price:571814},
-        {k:'8080', label:'8080 🌸', price:1144000},
-        {k:'esp', label:'ESP (Card)', price:58000}
-      ]},
-
-{id:'mlbmlc', name:'Mobile Legend', logo:'img/mlbmlc.png', desc:'Mobile Legends Baseball & Coins', packages:[
-  // Paket MLB
-  {k:'85', label:'85 💎', price:22344},
-  {k:'240', label:'240 💎', price:63567},
-  {k:'296', label:'296 💎', price:78264},
-  {k:'301', label:'301 💎', price:80000},
-  {k:'568', label:'568 💎', price:147109},
-  {k:'627', label:'627 💎', price:163400},
-  {k:'716', label:'716 💎', price:189500},
-  {k:'976', label:'976 💎', price:254000},
-  {k:'1050', label:'1050 💎', price:270000},
-
-  // Paket MLC
-  {k:'28', label:'28 💎', price:8000},
-  {k:'44', label:'44 💎', price:12000},
-  {k:'59', label:'59 💎', price:16203},
-  {k:'170', label:'170 💎', price:45000},
-  {k:'408', label:'408 💎', price:108000},
-  {k:'568c', label:'568 💎 (MLC)', price:150000},
-  {k:'875', label:'875 💎', price:225000},
-  {k:'2010', label:'2010 💎', price:487000},
-  {k:'4830', label:'4830 💎', price:1155000}
-]}
-
-      // MLBB DOUBLE
+       // MLBB DOUBLE
       {id:'mlbbdouble', name:'MLBB DOUBLE', logo:'img/mlbbdouble.png', desc:'MLBB Double Packs', packages:[
         {k:'50+50', label:'50+50', price:15000},
         {k:'150+150', label:'150+150', price:46000},
@@ -256,7 +235,7 @@
         {k:'500+500', label:'500+500', price:150000}
       ]},
 
-      // MLVILOG
+       // MLVILOG
       {id:'mlvilog', name:'MLVILOG', logo:'img/mlvilog.png', desc:'MLVILOG (Khusus Combine & Paket besar)', packages:[
         {k:'275', label:'275 💎 — Khusus Combine', price:70000},
         {k:'565', label:'565 💎', price:130000},
@@ -269,6 +248,28 @@
         {k:'2975', label:'2975 💎', price:605000},
         {k:'6000', label:'6000 💎', price:1200000},
         {k:'12000', label:'12000 💎', price:2400000}
+      ]},
+
+      // GENSHIN
+      {id:'genshin', name:'GENSHIN', logo:'img/genshin.png', desc:'Genshin — Primogems & Welkin', packages:[
+        {k:'60', label:'60 💠', price:11667},
+        {k:'330', label:'330 💠', price:58335},
+        {k:'1090', label:'1090 💠', price:175005},
+        {k:'2240', label:'2240 💠', price:373334},
+        {k:'3880', label:'3880 💠', price:571673},
+        {k:'8080', label:'8080 💠', price:1143366},
+        {k:'welkin', label:'Welkin', price:58335}
+      ]},
+
+      // HSR
+      {id:'hsr', name:'HSR', logo:'img/hsr.png', desc:'Honkai Star Rail', packages:[
+        {k:'60', label:'60 🌸', price:14273},
+        {k:'330', label:'330 🌸', price:58000},
+        {k:'1090', label:'1090 🌸', price:173500},
+        {k:'2240', label:'2240 🌸', price:371114},
+        {k:'3880', label:'3880 🌸', price:571814},
+        {k:'8080', label:'8080 🌸', price:1144000},
+        {k:'esp', label:'ESP (Card)', price:58000}
       ]},
 
       // PUBGM
@@ -530,5 +531,3 @@
   </script>
 </body>
 </html>
-
-
