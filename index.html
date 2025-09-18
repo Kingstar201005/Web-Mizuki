@@ -154,7 +154,7 @@
       </div>
     </div>
 
-    <footer>© 2025 MIZUKI STORE • Order 08.00 - 22.00 WIB • Salah ID bukan tanggung jawab kami</footer>
+    <footer>© 2025 MIZUKI STORE • Order 08.00 - 22.00 WIB • Galang • @glng.005</footer>
   </main>
 
   <!-- modal confirm -->
@@ -168,7 +168,7 @@
     // Gunakan id untuk nama file gambar: img/<id>.png (contoh: img/ff.png)
     const GAMES = [
        // MLB
-      {id:'mlb', name:'MOBILE LEGEND', logo:'img/mlb.png', desc:'MOBILE LEGEND TOP-UP', packages:[
+      {id:'mlb', name:'MOBILE LEGEND', logo:'img/ML.jpg', desc:'MOBILE LEGEND TOP-UP', packages:[
         {k:'28', label:'28 💎', price:8000},
         {k:'44', label:'44 💎', price:12000},
         {k:'59', label:'59 💎', price:16203},
@@ -189,7 +189,7 @@
       ]},
 
        // FREE FIRE (FF)
-      {id:'ff', name:'FREE FIRE', logo:'img/ff.png', desc:'FREE FIRE - Top up Diamonds', packages:[
+      {id:'ff', name:'FREE FIRE', logo:'img/FF.jpg', desc:'FREE FIRE - Top up Diamonds', packages:[
         {k:'50', label:'50 💎', price:7500},
         {k:'100', label:'100 💎', price:15000},
         {k:'200', label:'200 💎', price:28000},
@@ -206,7 +206,7 @@
       ]},
 
       // GIFTSKINML
-      {id:'giftskinml', name:'GIFTSKINML', logo:'img/giftskinml.png', desc:'Gift Skin & Item Mobile Legends', packages:[
+      {id:'giftskinml', name:'GIFTSKINML', logo:'img/ML.jpg', desc:'Gift Skin & Item Mobile Legends', packages:[
         // Gift Skin
         {k:'299s', label:'299 💎 — NORMAL-GIFT.SKIN', price:0},
         {k:'599s', label:'599 💎 — ELITE-GIFT.SKIN', price:0},
@@ -228,7 +228,7 @@
       ]},
 
        // MLBB DOUBLE
-      {id:'mlbbdouble', name:'MLBB DOUBLE', logo:'img/mlbbdouble.png', desc:'MLBB Double Packs', packages:[
+      {id:'mlbbdouble', name:'MLBB DOUBLE', logo:'img/ML.jpg', desc:'MLBB Double Packs', packages:[
         {k:'50+50', label:'50+50', price:15000},
         {k:'150+150', label:'150+150', price:46000},
         {k:'250+250', label:'250+250', price:74500},
@@ -236,7 +236,7 @@
       ]},
 
        // MLVILOG
-      {id:'mlvilog', name:'MLVILOG', logo:'img/mlvilog.png', desc:'MLVILOG (Khusus Combine & Paket besar)', packages:[
+      {id:'mlvilog', name:'MLVILOG', logo:'img/ML.jpg', desc:'MLVILOG (Khusus Combine & Paket besar)', packages:[
         {k:'275', label:'275 💎 — Khusus Combine', price:70000},
         {k:'565', label:'565 💎', price:130000},
         {k:'840', label:'840 💎', price:200000},
@@ -251,7 +251,7 @@
       ]},
 
       // GENSHIN
-      {id:'genshin', name:'GENSHIN', logo:'img/genshin.png', desc:'Genshin — Primogems & Welkin', packages:[
+      {id:'genshin', name:'GENSHIN', logo:'img/Genshin.jpg', desc:'Genshin — Primogems & Welkin', packages:[
         {k:'60', label:'60 💠', price:11667},
         {k:'330', label:'330 💠', price:58335},
         {k:'1090', label:'1090 💠', price:175005},
@@ -262,7 +262,7 @@
       ]},
 
       // HSR
-      {id:'hsr', name:'HSR', logo:'img/hsr.png', desc:'Honkai Star Rail', packages:[
+      {id:'hsr', name:'HSR', logo:'img/Honkai.jpg', desc:'Honkai Star Rail', packages:[
         {k:'60', label:'60 🌸', price:14273},
         {k:'330', label:'330 🌸', price:58000},
         {k:'1090', label:'1090 🌸', price:173500},
@@ -273,7 +273,7 @@
       ]},
 
       // PUBGM
-      {id:'pubgm', name:'PUBGM', logo:'img/pubgm.png', desc:'PUBG Mobile UC', packages:[
+      {id:'pubgm', name:'PUBGM', logo:'img/PUBG.jpg', desc:'PUBG Mobile UC', packages:[
         {k:'60', label:'60 💸', price:15000},
         {k:'325', label:'325 💸', price:75000},
         {k:'660', label:'660 💸', price:150000},
@@ -283,7 +283,7 @@
       ]},
 
       // ROBUX
-      {id:'robux', name:'ROBUX', logo:'img/robux.png', desc:'Robux (Official)', packages:[
+      {id:'robux', name:'ROBUX', logo:'img/roblox.jpg', desc:'Robux (Official)', packages:[
         {k:'800', label:'800 🪙', price:169000},
         {k:'1600', label:'1600 🪙', price:338000},
         {k:'2000', label:'2000 🪙', price:420000},
@@ -294,7 +294,7 @@
       ]},
 
       // ROBUXVILOG
-      {id:'robuxvilog', name:'ROBUXVILOG', logo:'img/robuxvilog.png', desc:'Robux Vilog', packages:[
+      {id:'robuxvilog', name:'ROBUXVILOG', logo:'img/roblox.jpg', desc:'Robux Vilog', packages:[
         {k:'80', label:'80 Robux', price:15000},
         {k:'160', label:'160 Robux', price:30000},
         {k:'240', label:'240 Robux', price:43500},
@@ -311,14 +311,14 @@
       ]},
 
       // SL (starlight)
-      {id:'sl', name:'SL (Starlight)', logo:'img/sl.png', desc:'Starlight (PO & Delay)', packages:[
+      {id:'sl', name:'SL (Starlight)', logo:'img/sl.jpg', desc:'Starlight (PO & Delay)', packages:[
         {k:'sl300', label:'Starlight 300 💎', price:36000, note:'Delay 7-10 Hari'},
         {k:'sl750', label:'Starlight 750 💎', price:80000, note:'Delay 7-10 Hari'},
         {k:'po300', label:'PO Starlight 300 💎', price:33000, note:'PO bulan depan'}
       ]},
 
       // VALORANT
-      {id:'valorant', name:'VALORANT', logo:'img/valorant.png', desc:'Valorant Points', packages:[
+      {id:'valorant', name:'VALORANT', logo:'img/Valorant.jpg', desc:'Valorant Points', packages:[
         {k:'475', label:'475 VP', price:53500},
         {k:'1000', label:'1000 VP', price:106500},
         {k:'2050', label:'2050 VP', price:210000},
@@ -328,12 +328,12 @@
       ]},
 
       // WDP
-      {id:'wdp', name:'WDP', logo:'img/wdp.png', desc:'Weekly Diamond Pass', packages:[
+      {id:'wdp', name:'WDP', logo:'img/ML.jpg', desc:'Weekly Diamond Pass', packages:[
         {k:'fast', label:'VIA ID FAST', price:27100, note:'Claim 20💎 selama 7 hari • Total 220💎'}
       ]},
 
       // ZZZ
-      {id:'zzz', name:'ZZZ', logo:'img/zzz.png', desc:'ZZZ service', packages:[
+      {id:'zzz', name:'ZZZ', logo:'img/zzz.jpg', desc:'ZZZ service', packages:[
         {k:'60z', label:'60 💾', price:12800},
         {k:'300_30', label:'300+30 💾', price:60000},
         {k:'980_110', label:'980+110 💾', price:183000},
@@ -531,3 +531,4 @@
   </script>
 </body>
 </html>
+
